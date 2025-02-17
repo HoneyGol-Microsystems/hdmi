@@ -1,0 +1,24 @@
+CAPI=2:
+name: hdl-util:ip:hdmi:1.0.0
+description: HDMI
+
+filesets:
+  rtl:
+    files:
+      - src/audio_clock_regeneration_packet.sv
+      - src/audio_info_frame.sv
+      - src/audio_sample_packet.sv
+      - src/auxiliary_video_information_info_frame.sv
+      - src/packet_assembler.sv
+      - src/packet_picker.sv
+      - src/serializer.sv
+      - src/source_product_description_info_frame.sv
+      - src/tmds_channel.sv
+      - src/hdmi.sv
+    file_type: systemVerilogSource
+
+targets:
+  default: &default
+    filesets:
+      - rtl
+    toplevel: dummy
