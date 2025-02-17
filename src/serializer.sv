@@ -174,18 +174,18 @@ module serializer
         endgenerate
         `ifdef MODEL_TECH
             logic [3:0] position = 4'd0;
-            always_ff @(posedge clk_pixel_x5)
+            always_ff @(posedge clk_pixel_x5 or negedge clk_pixel_x5)
             begin
                 tmds <= {tmds_reversed[2][position], tmds_reversed[1][position], tmds_reversed[0][position]};
                 tmds_clock <= position >= 4'd5;
                 position <= position == 4'd9 ? 4'd0 : position + 1'd1;
             end
-            always_ff @(negedge clk_pixel_x5)
-            begin
-                tmds <= {tmds_reversed[2][position], tmds_reversed[1][position], tmds_reversed[0][position]};
-                tmds_clock <= position >= 4'd5;
-                position <= position == 4'd9 ? 4'd0 : position + 1'd1;
-            end
+            // always_ff @(negedge clk_pixel_x5)
+            // begin
+            //     tmds <= {tmds_reversed[2][position], tmds_reversed[1][position], tmds_reversed[0][position]};
+            //     tmds_clock <= position >= 4'd5;
+            //     position <= position == 4'd9 ? 4'd0 : position + 1'd1;
+            // end
         `else
             `ifdef ALTERA_RESERVED_QIS
                 altlvds_tx	ALTLVDS_TX_component (
